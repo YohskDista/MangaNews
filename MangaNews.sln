@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{62106E2A-97BF-49E3-A06C-AC1114707997}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{1A15C567-82B7-4654-8F0C-0CD4DE3986E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8FE86648-B8A2-4437-AAF6-56BB51DA611D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaNews.Sample", "samples\MangaApi.Sample\MangaNews.Sample.csproj", "{69C633B2-DE9A-4462-BA94-855A8D9A6560}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaNews.Api", "src\MangaNews.Api\MangaNews.Api.csproj", "{24CAFAFA-5D06-4D2B-AF88-187BED66F016}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69C633B2-DE9A-4462-BA94-855A8D9A6560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69C633B2-DE9A-4462-BA94-855A8D9A6560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69C633B2-DE9A-4462-BA94-855A8D9A6560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69C633B2-DE9A-4462-BA94-855A8D9A6560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24CAFAFA-5D06-4D2B-AF88-187BED66F016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24CAFAFA-5D06-4D2B-AF88-187BED66F016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24CAFAFA-5D06-4D2B-AF88-187BED66F016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24CAFAFA-5D06-4D2B-AF88-187BED66F016}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69C633B2-DE9A-4462-BA94-855A8D9A6560} = {1A15C567-82B7-4654-8F0C-0CD4DE3986E5}
+		{24CAFAFA-5D06-4D2B-AF88-187BED66F016} = {62106E2A-97BF-49E3-A06C-AC1114707997}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6E761DA-10AF-4D8F-88C3-B11C891EEAA5}
+	EndGlobalSection
+EndGlobal
