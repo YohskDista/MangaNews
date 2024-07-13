@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaNews.Parser", "src\Man
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaNews.Core", "src\MangaNews.Core\MangaNews.Core.csproj", "{89605959-BFB1-4FF0-986E-587C926A4085}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaNews.Api", "src\MangaNews.Api\MangaNews.Api.csproj", "{DB936D16-DF2E-441C-B9EC-816089F54211}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{89605959-BFB1-4FF0-986E-587C926A4085}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89605959-BFB1-4FF0-986E-587C926A4085}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89605959-BFB1-4FF0-986E-587C926A4085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB936D16-DF2E-441C-B9EC-816089F54211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB936D16-DF2E-441C-B9EC-816089F54211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB936D16-DF2E-441C-B9EC-816089F54211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB936D16-DF2E-441C-B9EC-816089F54211}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{AA9BE20C-FD95-4E0A-AF63-0273B5132DAE} = {1A15C567-82B7-4654-8F0C-0CD4DE3986E5}
 		{64414036-CFE9-4BC1-B25F-F08D44143EE1} = {62106E2A-97BF-49E3-A06C-AC1114707997}
 		{89605959-BFB1-4FF0-986E-587C926A4085} = {62106E2A-97BF-49E3-A06C-AC1114707997}
+		{DB936D16-DF2E-441C-B9EC-816089F54211} = {62106E2A-97BF-49E3-A06C-AC1114707997}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6E761DA-10AF-4D8F-88C3-B11C891EEAA5}
