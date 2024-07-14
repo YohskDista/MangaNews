@@ -2,6 +2,8 @@
 using MangaNews.Core;
 using MangaNews.Core.Services;
 using MangaNews.Parser.Extensions;
+using System.Globalization;
+using System.Reflection.Metadata;
 
 namespace MangaNews.Parser;
 
@@ -33,15 +35,14 @@ public sealed class MangaProvider : IMangaProvider
 
             var imageUri = node.Descendants("img")
                 .FindClass("img-loading")
-                .Select(n => n.Attributes["data-src"].Value).First();
+                .First()
+                .GetAttributeValue("data-src", string.Empty);
 
             var relativeUri = linkDescendants.Where(n => n.Attributes["rel"].Value == "nofollow")
-                .Select(n => n.Attributes["href"].Value)
-                .First();
+                                             .First()
+                                             .GetAttributeValue("href", string.Empty);
 
-            var title = linkDescendants.FindClass("tooltip")
-                .Select(n => n.InnerHtml)
-                .First();
+            var title = linkDescendants.FindClass("tooltip").First().InnerHtml;
 
             var chapters = node.Descendants("li").Skip(1).Select(convertToChapter).ToList();
 
@@ -85,15 +86,19 @@ public sealed class MangaProvider : IMangaProvider
         // TODO : translate to date time struct
         var updateTime = list[3].InnerHtml.Replace("Last updated : ", string.Empty);
 
-        var descriptionDiv = document.DocumentNode
-                .Descendants("div")
-                .FindId("noidungm")
-                .First();
+        DateTime.TryParseExact(updateTime, "MMM dd,yyyy - hh:mm tt", null, DateTimeStyles.None, out var convertedTime);
+
+        var description = GetMangaDescription(document.DocumentNode);
+
+        return new MangaDetail(title, author, description, convertedTime, imageSrc);
+    }
+
+    private string GetMangaDescription(HtmlNode htmlNode)
+    {
+        var descriptionDiv = htmlNode.Descendants("div").FindId("noidungm").First();
 
         descriptionDiv.RemoveChild(descriptionDiv.Descendants("h2").First());
 
-        var description = descriptionDiv.InnerText;
-
-        return new MangaDetail(title, description, DateTime.Now, imageSrc);
+        return descriptionDiv.InnerText;
     }
 }
