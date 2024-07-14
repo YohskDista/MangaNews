@@ -65,6 +65,15 @@ public sealed class MangaProvider : IMangaProvider
 
         var document = await _htmlWeb.LoadFromWebAsync($"{UrlPageTemp}/manga/{id}");
 
+        var imageSrc = document.DocumentNode
+                               .Descendants("div")
+                               .FindClass("manga-info-pic")
+                               .First()
+                               .Descendants("img")
+                               .First()
+                               .Attributes["src"]
+                               .Value;
+
         var infoNode = document.DocumentNode
                                .Descendants("ul")
                                .FindClass("manga-info-text")
@@ -77,6 +86,16 @@ public sealed class MangaProvider : IMangaProvider
         var author = list[1].GetFirstDescandant("a").InnerHtml;
 
         var updateTime = list[3].InnerHtml.Replace("Last updated : ", string.Empty);
+
+        var t = document.DocumentNode
+                .Descendants("div")
+                .Where(n => n.Attributes.Contains("id") && n.Attributes["id"].Value == "noidungm")
+                .First();
+
+        t.RemoveChild(t.Descendants("h2").First());
+        var description = t.InnerText;
+
+        return new MangaDetail(title, description, DateTime.Now, imageSrc);
 
         throw new NotImplementedException();
     }
