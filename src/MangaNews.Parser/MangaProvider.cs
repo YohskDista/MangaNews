@@ -51,9 +51,33 @@ public sealed class MangaProvider : IMangaProvider
         Chapter convertToChapter(HtmlNode node)
         {
             var chapterNode = node.Descendants("a").FindClass("sts sts_1").First();
-            var releaseTime = node.Descendants("i").First().InnerHtml.TrimEnd(' ', '\n');
+            var releaseTime = node.GetFirstDescandant("i").InnerHtml.TrimEnd(' ', '\n');
 
             return new Chapter(chapterNode.InnerHtml, releaseTime, chapterNode.Attributes["href"].Value);
         }
+    }
+
+    public async Task<MangaDetail> GetMangaAsync(
+        string id, 
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+
+        var document = await _htmlWeb.LoadFromWebAsync($"{UrlPageTemp}/manga/{id}");
+
+        var infoNode = document.DocumentNode
+                               .Descendants("ul")
+                               .FindClass("manga-info-text")
+                               .First();
+
+        var title = infoNode.GetFirstDescandant("h1").InnerHtml;
+
+        var list = infoNode.SelectNodes("li");
+
+        var author = list[1].GetFirstDescandant("a").InnerHtml;
+
+        var updateTime = list[3].InnerHtml.Replace("Last updated : ", string.Empty);
+
+        throw new NotImplementedException();
     }
 }
