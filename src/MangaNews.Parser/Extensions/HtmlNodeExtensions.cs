@@ -27,7 +27,7 @@ internal static class HtmlNodeExtensions
         return nodes.Where(n => n.Attributes.Contains(attributeKey));
     }
 
-    public static HtmlNode GetFirstDescandant(this HtmlNode node, string name)
+    public static HtmlNode GetFirstDescendant(this HtmlNode node, string name)
     {
         ArgumentNullException.ThrowIfNull(node);
         ArgumentException.ThrowIfNullOrWhiteSpace(name);

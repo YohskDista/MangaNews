@@ -3,20 +3,14 @@ using MangaNews.Core;
 using MangaNews.Core.Services;
 using MangaNews.Parser.Extensions;
 using System.Globalization;
-using System.Reflection.Metadata;
 
 namespace MangaNews.Parser;
 
-public sealed class MangaProvider : IMangaProvider
+public sealed class MangaProvider(HtmlWeb htmlWeb) : IMangaProvider
 {
     private const string UrlPageTemp = "https://ww8.mangakakalot.tv/";
 
-    private readonly HtmlWeb _htmlWeb;
-
-    public MangaProvider(HtmlWeb htmlWeb)
-    {
-        _htmlWeb = htmlWeb ?? throw new ArgumentNullException(nameof(htmlWeb));
-    }
+    private readonly HtmlWeb _htmlWeb = htmlWeb ?? throw new ArgumentNullException(nameof(htmlWeb));
 
     public async Task<IReadOnlyList<MangaRelease>> GetLatestMangaAsync(
         CancellationToken cancellationToken = default)
@@ -38,8 +32,7 @@ public sealed class MangaProvider : IMangaProvider
                 .First()
                 .GetAttributeValue("data-src", string.Empty);
 
-            var relativeUri = linkDescendants.Where(n => n.Attributes["rel"].Value == "nofollow")
-                                             .First()
+            var relativeUri = linkDescendants.First(n => n.Attributes["rel"].Value == "nofollow")
                                              .GetAttributeValue("href", string.Empty);
 
             var title = linkDescendants.FindClass("tooltip").First().InnerHtml;
@@ -52,7 +45,7 @@ public sealed class MangaProvider : IMangaProvider
         Chapter convertToChapter(HtmlNode node)
         {
             var chapterNode = node.Descendants("a").FindClass("sts sts_1").First();
-            var releaseTime = node.GetFirstDescandant("i").InnerHtml.TrimEnd(' ', '\n');
+            var releaseTime = node.GetFirstDescendant("i").InnerHtml.TrimEnd(' ', '\n');
 
             return new Chapter(chapterNode.InnerHtml, releaseTime, chapterNode.Attributes["href"].Value);
         }
@@ -77,13 +70,12 @@ public sealed class MangaProvider : IMangaProvider
                                .FindClass("manga-info-text")
                                .First();
 
-        var title = infoNode.GetFirstDescandant("h1").InnerHtml;
+        var title = infoNode.GetFirstDescendant("h1").InnerHtml;
 
         var list = infoNode.SelectNodes("li");
 
-        var author = list[1].GetFirstDescandant("a").InnerHtml;
+        var author = list[1].GetFirstDescendant("a").InnerHtml;
 
-        // TODO : translate to date time struct
         var updateTime = list[3].InnerHtml.Replace("Last updated : ", string.Empty);
 
         DateTime.TryParseExact(updateTime, "MMM dd,yyyy - hh:mm tt", null, DateTimeStyles.None, out var convertedTime);
