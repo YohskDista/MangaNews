@@ -8,6 +8,10 @@ internal static class HtmlNodeExtensions
     {
         return nodes.Where(d => d.Attributes.FirstOrDefault(a => a.Name == "class")?.Value == classValue);
     }
+    public static IEnumerable<HtmlNode> FindId(this IEnumerable<HtmlNode> nodes, string idValue)
+    {
+        return nodes.Where(d => d.Attributes.FirstOrDefault(a => a.Name == "id")?.Value == idValue);
+    }
 
     public static HtmlNode GetFirstDescandant(this HtmlNode node, string name)
     {
